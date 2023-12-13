@@ -1,6 +1,11 @@
 import openai
+from tenacity import (
+    retry,
+    stop_after_attempt,
+    wait_random_exponential,
+)  # for exponential backoff
 
-
+@retry(wait=wait_random_exponential(min=1, max=90), stop=stop_after_attempt(6))
 def generate_response(sys_message, prompt, engine_model, temperature):
     """
     Generates a response to a given prompt using the OpenAI Chat API.
@@ -34,4 +39,11 @@ def generate_response(sys_message, prompt, engine_model, temperature):
 
     response = openai.ChatCompletion.create(**params)
     answer = response.choices[0]["message"]["content"]
+    
+    # Cleanse the response to remove any non-JSON characters, as different models return different formats
+    answer = answer.replace('```json\n', '')
+    answer = answer.replace('\n```', '')
+    answer = answer.replace('\n', '')
+    answer = answer.replace('\t', '')
+    
     return answer
