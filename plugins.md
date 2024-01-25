@@ -29,7 +29,7 @@ class ChatModel(ABC):
 ```python
 class Plugin(ChatModel):
     def __init__(self, model_name: str, temperature: float, api_key: str):
-        self._deployment_name = deployment_name
+        self._model_name = model_name
         self._temperature = temperature
         self._client = OpenAI(api_key=api_key)
 
@@ -40,7 +40,7 @@ class Plugin(ChatModel):
         ]
 
         response = self._client.chat.completions.create(
-            model=self._deployment_name,
+            model=self._model_name,
             messages=messages,
             temperature=self._temperature,
         )
