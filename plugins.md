@@ -1,4 +1,4 @@
-# rag-exp-acc plugins
+# Rag Experiment Accelerator plugins
 
 
 ## Why
@@ -164,7 +164,7 @@ An example of how a chat model can be loaded from config.json
 ```
 
 
-## Requirments and limitations
+## Requirements and limitations
 - The class must implment the methods of a known abstract base class.
 - the config object must include the path to the module
 - the plugin must have a consistent name like `Plugin` to enable creating an instance of the class from the module
