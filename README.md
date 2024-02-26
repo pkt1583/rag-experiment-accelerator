@@ -56,7 +56,7 @@ LOGGING_LEVEL is INFO by default. Allowed logging levels are NOTSET, DEBUG, INFO
 3. Execute the requirements.txt in a conda (first install Anaconda/Miniconda) or virtual environment (then install a couple of dependencies - prompted on the run) to install the dependencies.
 
 ```bash
-conda create -n rag-test python=3.10
+conda create -n rag-test python=3.11
 conda activate rag-test
 pip install .
 ```
@@ -77,6 +77,16 @@ az account show
 - [Azure OpenAI Service](https://learn.microsoft.com/en-us/azure/ai-services/openai/overview#how-do-i-get-access-to-azure-openai) or access to the [OpenAI API](https://platform.openai.com/docs/quickstart?context=python)
 - [Azure Machine Learning Resources](https://learn.microsoft.com/en-us/azure/machine-learning/tutorial-azure-ml-in-a-day?view=azureml-api-2)
 
+### One click Azure deployment
+
+[![Deploy to Azure](https://aka.ms/deploytoazurebutton)](https://portal.azure.com/#create/Microsoft.Template/uri/https%3A%2F%2Fraw.githubusercontent.com%2Fmicrosoft%2Frag-experiment-accelerator%2Fdevelopment%2Finfra%2Fmain.json)
+
+### Deploy with Azure CLI
+
+```bash
+az login
+az deployment group create --subscription <subscription-id> --resource-group <resource-group>  --template-file infra/main.bicep
+```
 
 ## How to use
 
@@ -126,24 +136,24 @@ To use the **RAG Experiment Accelerator**, follow these steps:
 
 `embedding_models` is an array containing the configuration for the embedding models to use. Embedding model `type` must be `azure` for Azure OpenAI models and `sentence-transformer` for HuggingFace sentence trasnformer models.
 
-### Azure OpenAI embedding model conifg
+### Azure OpenAI embedding model config
 
 ```json
-    {
-        "type": "azure", 
-        "deployment_name": "the deployment name of the model",
-        "dimension": "the dimesion of the embedding model. Defaults to 1536 which is the dimension of text-embedding-ada-002"
-    },
+{
+    "type": "azure", 
+    "deployment_name": "the deployment name of the model",
+    "dimension": "the dimesion of the embedding model. Defaults to 1536 which is the dimension of text-embedding-ada-002"
+}
 ```
 
 ### Sentence Transformer embedding model
 
 ```json
-        {
-            "type": "sentence-transformer",
-            "model_name": "the name of the sentence transformer model",
-            "dimension": "the dimension of the model. This field is not required if model name is one of ['all-MiniLM-L6-v2', 'all-mpnet-base-v2', 'bert-large-nli-mean-tokens]"
-        }
+{
+    "type": "sentence-transformer",
+    "model_name": "the name of the sentence transformer model",
+    "dimension": "the dimension of the model. This field is not required if model name is one of ['all-MiniLM-L6-v2', 'all-mpnet-base-v2', 'bert-large-nli-mean-tokens]"
+}
 ```
 ## Reports
 
