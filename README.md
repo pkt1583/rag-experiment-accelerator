@@ -62,7 +62,7 @@ At the moment, the RAG Experiment Accelerator runs on a desktop machine. There a
 
 ### 1. Run within a Development Container
 
-Using a development container will mean that all of the required software is installed for you. This will require WSL. For more information about development containers visit [containers.dev](https://containers.dev/)
+Using a development container will mean that all of the required software is installed for you. For more information about development containers visit [containers.dev](https://containers.dev/)
 
 #### Install the Pre-Requisite Software
 
